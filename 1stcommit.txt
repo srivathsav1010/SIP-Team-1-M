@@ -1,0 +1,62 @@
+--------------------------START-----------------------------------------------
+this commit contains the intial code of our SIP project which is the SIP timetable generator
+This JS code commit generates the a randomly planned timetable in the console with following constraints
+
+-------------------------START OF CONSTRAINTS-------------------------------------
+
+->There are 6 periods each day
+->There are two subjects SIP and EEP.
+->SIP == 2 periods ; EEP == 3 periods
+->There are total of 25 faculty members
+->Each faculty will have only one lab per day
+->There are total of 14 sections taken in account
+->7 sections have SIP lab and the other 7 sections have EEP lab 
+
+
+----------------------------END OF CONSTRAINTS------------------------------
+
+----------------------------FUTURE PLANNING----------------------------------
+
+->Add HTML and CSS file.
+->Apply the DOM on the required parts
+->Keep a track on the workloads of the faculty
+->Make a way to produce individual timetables for sections and the faculty
+->Make a option to download the timetable in form of pdfs or any file type.
+->Limited number of classes per day.
+
+-----------------------------------------------------------------------------
+
+-----------------------------OUTPUT------------------------------------------
+
+->Here is the sample output to show you the current situation we are working with :
+
+
+Monday
+----------------------------
+Section 1 | 9:00 - 10:00 AM, 10:00 - 11:00 AM - SIP | Faculty: SIP Faculty 18
+Section 2 | 11:00 - 12:00 PM, 1:00 - 2:00 PM - SIP | Faculty: SIP Faculty 7
+Section 3 | 2:00 - 3:00 PM, 3:00 - 4:00 PM - SIP | Faculty: SIP Faculty 20
+
+Tuesday
+----------------------------
+Section 1 | 9:00 - 10:00 AM, 10:00 - 11:00 AM - SIP | Faculty: SIP Faculty 20
+Section 2 | 11:00 - 12:00 PM, 1:00 - 2:00 PM - SIP | Faculty: SIP Faculty 13
+Section 3 | 2:00 - 3:00 PM, 3:00 - 4:00 PM - SIP | Faculty: SIP Faculty 4
+
+Wednesday
+----------------------------
+Section 1 | 9:00 - 10:00 AM, 10:00 - 11:00 AM - SIP | Faculty: SIP Faculty 1
+Section 2 | 11:00 - 12:00 PM, 1:00 - 2:00 PM - SIP | Faculty: SIP Faculty 7
+Section 3 | 2:00 - 3:00 PM, 3:00 - 4:00 PM - SIP | Faculty: SIP Faculty 15
+
+Thursday
+----------------------------
+Section 1 | 9:00 - 10:00 AM, 10:00 - 11:00 AM - SIP | Faculty: SIP Faculty 5
+Section 2 | 11:00 - 12:00 PM, 1:00 - 2:00 PM - SIP | Faculty: SIP Faculty 14
+Section 3 | 2:00 - 3:00 PM, 3:00 - 4:00 PM - SIP | Faculty: SIP Faculty 25
+
+Friday
+----------------------------
+Section 1 | 9:00 - 10:00 AM, 10:00 - 11:00 AM - SIP | Faculty: SIP Faculty 23
+Section 2 | 11:00 - 12:00 PM, 1:00 - 2:00 PM - SIP | Faculty: SIP Faculty 5
+Section 3 | 2:00 - 3:00 PM, 3:00 - 4:00 PM - SIP | Faculty: SIP Faculty 24
