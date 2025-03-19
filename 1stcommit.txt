@@ -23,6 +23,9 @@ This JS code commit generates the a randomly planned timetable in the console wi
 ->Make a way to produce individual timetables for sections and the faculty
 ->Make a option to download the timetable in form of pdfs or any file type.
 ->Limited number of classes per day.
+->separate the main faculty and sub faculties.
+->different departments.
+->
 
 -----------------------------------------------------------------------------
 
