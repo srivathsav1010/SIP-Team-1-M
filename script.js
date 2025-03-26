@@ -1,47 +1,68 @@
-const subjects = ["SIP", "EEP"];
-const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-const timeSlots = ["9:00 - 10:00 AM", "10:00 - 11:00 AM", "11:00 - 12:00 PM", "1:00 - 2:00 PM", "2:00 - 3:00 PM", "3:00 - 4:00 PM"];
-const sections = Array.from({ length: 14 }, (_, i) => `Section ${i + 1}`);
-const sipSections = sections.slice(0, 7);
-const eepSections = sections.slice(7);
-const facultySIP = Array.from({ length: 25 }, (_, i) => `SIP Faculty ${i + 1}`);
-const facultyEEP = Array.from({ length: 25 }, (_, i) => `EEP Faculty ${i + 1}`);
+const readline = require("readline-sync");
 
-function getRandomFaculty(facultyList, assignedFaculties) {
-    let availableFaculties = facultyList.filter(f => !assignedFaculties.includes(f));
+function getUserInput(promptMessage, defaultValue) {
+    let input = readline.question(`${promptMessage} (Default: ${defaultValue}): `);
+    return input ? parseInt(input) : defaultValue;
+}
+
+const totalSections = getUserInput("Enter the total number of sections", 14);
+const sipCount = getUserInput("Enter the number of SIP sections", Math.ceil(totalSections / 2));
+const eepCount = getUserInput("Enter the number of EEP sections", totalSections - sipCount);
+const totalFaculty = getUserInput("Enter the total number of faculty", 30);
+
+const subjects = ["SIP", "EEP"];
+const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const sipTimeSlots = [
+    "10:10 - 12:10 PM", "1:00 - 3:00 PM"
+];
+const eepTimeSlots = [
+    "9:10 - 12:10 PM", "12:10 - 4:00 PM (Lunch Break: 1:10 - 2:00 PM)"
+];
+
+const sections = Array.from({ length: totalSections }, (_, i) => `Section ${i + 1}`);
+const sipSections = sections.slice(0, sipCount);
+const eepSections = sections.slice(sipCount, sipCount + eepCount);
+const facultyMembers = Array.from({ length: totalFaculty }, (_, i) => `Faculty ${i + 1}`);
+
+function getRandomFaculty(assignedFaculties) {
+    let availableFaculties = facultyMembers.filter(f => !assignedFaculties.includes(f));
     if (availableFaculties.length === 0) return null;
     return availableFaculties[Math.floor(Math.random() * availableFaculties.length)];
 }
 
 function generateTimetable() {
     let timetable = {};
-    let facultySchedule = {};
+    let sectionAssignedDays = {};
+    sections.forEach(section => (sectionAssignedDays[section] = false));
     
     days.forEach(day => {
         timetable[day] = [];
         let assignedFaculties = [];
-        let availableTimeSlots = [...timeSlots];
         
         sipSections.forEach(section => {
-            if (availableTimeSlots.length < 2) return;
-            let faculty = getRandomFaculty(facultySIP, assignedFaculties);
+            if (sectionAssignedDays[section]) return;
+            let faculty = getRandomFaculty(assignedFaculties);
             if (faculty) assignedFaculties.push(faculty);
-            let periods = availableTimeSlots.splice(0, 2);
-            timetable[day].push({ section, time: periods.join(", "), subject: "SIP", faculty });
+            let time = sipTimeSlots[Math.floor(Math.random() * sipTimeSlots.length)];
+            timetable[day].push({ section, time, subject: "SIP", faculty });
+            sectionAssignedDays[section] = true;
         });
         
         eepSections.forEach(section => {
-            if (availableTimeSlots.length < 3) return;
-            let faculty = getRandomFaculty(facultyEEP, assignedFaculties);
+            if (sectionAssignedDays[section]) return;
+            let faculty = getRandomFaculty(assignedFaculties);
             if (faculty) assignedFaculties.push(faculty);
-            let periods = availableTimeSlots.splice(0, 3);
-            timetable[day].push({ section, time: periods.join(", "), subject: "EEP", faculty });
+            let time = eepTimeSlots[Math.floor(Math.random() * eepTimeSlots.length)];
+            timetable[day].push({ section, time, subject: "EEP", faculty });
+            sectionAssignedDays[section] = true;
         });
     });
+    
     return timetable;
 }
 
 function displayTimetable(timetable) {
+    console.log(`Total Faculty: ${totalFaculty}`);
     for (const day in timetable) {
         console.log(`\n${day}`);
         console.log("----------------------------");
