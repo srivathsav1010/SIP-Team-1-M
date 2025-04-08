@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timetable Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .day {
+      background-color: #ddd;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Timetable Generator</h1>
+  <form id="timetableForm">
+    <label for="sections">Total Sections</label>
+    <input type="number" id="sections" value="15" />
+
+    <label for="sip">SIP Sections</label>
+    <input type="number" id="sip" value="8" />
+
+    <label for="eep">EEP Sections</label>
+    <input type="number" id="eep" value="7" />
+
+    <label for="faculty">Total Faculty</label>
+    <input type="number" id="faculty" value="30" />
+
+    <button type="submit">Generate Timetable</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+       const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const sipTimeSlots = ["10:10 - 12:10 PM", "1:00 - 3:00 PM"];
+    const eepTimeSlots = ["9:10 - 12:10 PM", "12:10 - 4:00 PM (Lunch Break: 1:10 - 2:00 PM)"];
+
+    document.getElementById("timetableForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const totalSections = parseInt(document.getElementById("sections").value);
+      const sipCount = parseInt(document.getElementById("sip").value);
+      const eepCount = parseInt(document.getElementById("eep").value);
+      const totalFaculty = parseInt(document.getElementById("faculty").value);
+
+      const sections = Array.from({ length: totalSections }, (_, i) => `Section ${i + 1}`);
+      const sipSections = sections.slice(0, sipCount);
+      const eepSections = sections.slice(sipCount, sipCount + eepCount);
+      const facultyMembers = Array.from({ length: totalFaculty }, (_, i) => `Faculty ${i + 1}`);
+
+      let timetable = {};
+      days.forEach(day => (timetable[day] = []));
+
+      let assignedFaculties = [];
+
+      function assignSectionRandomly(section, subject, timeSlots) {
+        let shuffledDays = [...days].sort(() => Math.random() - 0.5);
+        for (let day of shuffledDays) {
+          const faculty = getAvailableFaculty(assignedFaculties, facultyMembers);
+          if (!faculty) return;
+
+          let time = timeSlots[Math.floor(Math.random() * timeSlots.length)];
+          timetable[day].push({ section, time, subject, faculty });
+          assignedFaculties.push(faculty);
+          return; // section assigned, exit
+        }
+      }
+
+      sipSections.forEach(section => {
+        assignSectionRandomly(section, "SIP", sipTimeSlots);
+      });
+
+      eepSections.forEach(section => {
+        assignSectionRandomly(section, "EEP", eepTimeSlots);
+      });
+
+      renderTimetable(timetable);
+    });
+
+    function getAvailableFaculty(assigned, all) {
+      const available = all.filter(f => !assigned.includes(f));
+      if (available.length === 0) return null;
+      return available[Math.floor(Math.random() * available.length)];
+    }
+
+    function renderTimetable(timetable) {
+      let html = "";
+      for (const day of days) {
+        html += `<h3>${day}</h3>`;
+        html += `<table><tr><th>Section</th><th>Time</th><th>Subject</th><th>Faculty</th></tr>`;
+        timetable[day].forEach(session => {
+          html += `<tr><td>${session.section}</td><td>${session.time}</td><td>${session.subject}</td><td>${session.faculty}</td></tr>`;
+        });
+        html += `</table>`;
+      }
+      document.getElementById("output").innerHTML = html;
+    }
+
+  </script>
+</body>
+</html>
