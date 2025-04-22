@@ -72,5 +72,54 @@ function displayTimetable(timetable) {
     }
 }
 
+function renderTimetable(timetable) {
+    let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>S.NO.</th>
+              <th>DAY</th>
+              <th>CLASS</th>
+              <th>SESSION</th>
+              <th>FACULTY-1</th>
+              <th>FACULTY-2</th>
+              <th>FACULTY-3</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+
+    let serialNumber = 1;
+    for (const day of days) {
+        timetable[day].forEach((session) => {
+            html += `
+                <tr>
+                  <td>${serialNumber++}</td>
+                  <td>${day}</td>
+                  <td>${session.section}</td>
+                  <td>${session.time}</td>
+                  <td>${session.faculty || ""}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+            `;
+        });
+    }
+
+    html += `
+          </tbody>
+        </table>
+    `;
+
+    document.getElementById("output").innerHTML = html;
+}
+
+function showPage(id) {
+  const pages = ["home", "login", "timetable", "contact"];
+  pages.forEach(page => {
+    document.getElementById(page).style.display = page === id ? "block" : "none";
+  });
+}
+
 const randomTimetable = generateTimetable();
 displayTimetable(randomTimetable);
