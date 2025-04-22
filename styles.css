@@ -39,7 +39,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 999;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 nav a {
@@ -51,12 +51,14 @@ nav a {
   transition: all 0.3s ease;
 }
 
+/* Updated hover and active styles */
 nav a:hover,
 nav a.active {
   background: linear-gradient(90deg, #ff8a00, #e52e71);
   color: #fff;
-  transform: scale(1.1);
-  border-radius: 8px;
+  transform: scale(1.15) rotateX(10deg);
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(255, 105, 180, 0.6);
 }
 
 /* Container */
@@ -231,16 +233,18 @@ ul li:nth-child(3)::before {
   border-radius: 16px;
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   cursor: pointer;
   animation: fadeInUp 1s ease forwards;
   transform: translateY(30px);
   opacity: 0;
 }
 
+/* Updated hover styles */
 .card:hover {
-  transform: scale(1.03) translateY(0);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  transform: scale(1.08) translateY(-5px);
+  box-shadow: 0 0 25px #00f5c9, 0 0 40px #00f5c9;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 255, 255, 0.1));
 }
 
 .card h4 {
@@ -320,7 +324,11 @@ ul li:nth-child(3)::before {
   animation: fadeInUp 1.5s ease-in-out;
 }
 
-/* Animations */
+/* Fade-in animation for page transitions */
+.fade-in-page {
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }

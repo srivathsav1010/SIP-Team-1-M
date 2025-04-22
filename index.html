@@ -78,7 +78,9 @@
     <div id="timetable" style="display: none;">
       <button onclick="downloadPDF()">Download PDF</button>
       <button onclick="downloadExcel()">Export to Excel</button>
-      <div id="output" class="timetable-output"></div>
+      <div id="output" class="timetable-output">
+        <!-- Timetable content will be dynamically generated here -->
+      </div>
     </div>
 
     <!-- Contact Us Page -->
@@ -94,9 +96,11 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- Include Required Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
   <script>
     const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const sipTimeSlots = ["10:10 - 12:10 PM", "1:00 - 3:00 PM"];
@@ -105,7 +109,13 @@
     function showPage(id) {
       const pages = ["home", "login", "timetable", "contact"];
       pages.forEach(page => {
-        document.getElementById(page).style.display = page === id ? "block" : "none";
+        const el = document.getElementById(page);
+        el.style.display = page === id ? "block" : "none"; // Show the selected page, hide others
+        if (page === id) {
+          el.classList.add("fade-in-page"); // Add fade-in animation to the visible page
+        } else {
+          el.classList.remove("fade-in-page"); // Remove animation from hidden pages
+        }
       });
     }
 
@@ -199,9 +209,10 @@
         const imgData = canvas.toDataURL("image/png");
         const { jsPDF } = window.jspdf;
         const pdf = new jsPDF("p", "mm", "a4");
-        const imgProps = pdf.getImageProperties(imgData);
+
         const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
         pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
         pdf.save("timetable.pdf");
       });
