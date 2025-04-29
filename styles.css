@@ -219,7 +219,7 @@ ul li {
 
 ul li::before {
   content: "📧";
-  position: absolute;
+  position: relative;
   left: 0;
 }
 
@@ -340,6 +340,121 @@ ul li:nth-child(3)::before {
   animation: fadeIn 0.8s ease-in-out forwards;
 }
 
+/* Login Section */
+#login-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease-in;
+  margin-bottom: 20px;
+}
+
+#login-section form label {
+  color: #f0f0f0;
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+#login-section form input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  transition: 0.3s ease;
+  font-family: 'Raleway', sans-serif;
+}
+
+#login-section form input:focus {
+  outline: none;
+  border: 2px solid #00f5c9;
+  box-shadow: 0 0 15px #00f5c9;
+}
+
+#login-section button {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  background: linear-gradient(90deg, #00f5c9, #00d2ff);
+  color: #000;
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: 10px;
+}
+
+#login-section button:hover {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff00cc;
+}
+
+/* Generate Section */
+#generate-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.8s ease-in;
+}
+
+#generate-section form label {
+  color: #f0f0f0;
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+  font-weight: bold;
+}
+
+#generate-section form input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  transition: 0.3s ease;
+  font-family: 'Raleway', sans-serif;
+}
+
+#generate-section form input:focus {
+  outline: none;
+  border: 2px solid #00f5c9;
+  box-shadow: 0 0 15px #00f5c9;
+}
+
+#generate-section button {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  background: linear-gradient(90deg, #00f5c9, #00d2ff);
+  color: #000;
+  cursor: pointer;
+  transition: 0.4s ease;
+  margin-top: 10px;
+}
+
+#generate-section button:hover {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff00cc;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
@@ -371,4 +486,9 @@ ul li:nth-child(3)::before {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.email{
+  text-decoration: none;
+  color: white;
 }

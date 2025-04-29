@@ -51,27 +51,37 @@
 
     <!-- Login Form -->
     <div id="login" style="display: none;">
-      <form id="timetableForm">
-        <label for="email">Email</label>
-        <input type="email" id="email" required />
+      <!-- Login Section -->
+      <div id="login-section">
+        <form id="loginForm">
+          <label for="email">Email</label>
+          <input type="email" id="email" required />
 
-        <label for="password">Password</label>
-        <input type="password" id="password" required />
+          <label for="password">Password</label>
+          <input type="password" id="password" required />
 
-        <label for="sections">Total Sections</label>
-        <input type="number" id="sections" value="15" required />
+          <button type="submit">Login</button>
+        </form>
+      </div>
 
-        <label for="sip">SIP Sections</label>
-        <input type="number" id="sip" value="8" required />
+      <!-- Generate Section (Initially Hidden) -->
+      <div id="generate-section" style="display: none;">
+        <form id="timetableForm">
+          <label for="sections">Total Sections</label>
+          <input type="number" id="sections" value="15" required />
 
-        <label for="eep">EEP Sections</label>
-        <input type="number" id="eep" value="7" required />
+          <label for="sip">SIP Sections</label>
+          <input type="number" id="sip" value="8" required />
 
-        <label for="faculty">Total Faculty</label>
-        <input type="number" id="faculty" value="30" required />
+          <label for="eep">EEP Sections</label>
+          <input type="number" id="eep" value="7" required />
 
-        <button type="submit">Generate Schedule</button>
-      </form>
+          <label for="faculty">Total Faculty</label>
+          <input type="number" id="faculty" value="30" required />
+
+          <button type="submit">Generate Schedule</button>
+        </form>
+      </div>
     </div>
 
     <!-- Schedule Output -->
@@ -84,15 +94,14 @@
     </div>
 
     <!-- Contact Us Page -->
-    <div id="contact" style="display: none;">
+    <div id="contact"style="display: none;">
       <h2>Contact Us</h2>
       <p>If you have any questions or need assistance, feel free to reach out to us:</p>
       <ul>
-        <li><span>Email:</span> support@scheduleplanner.com</li>
-        <li><span>Phone:</span> +1 234 567 890</li>
-        <li><span>Address:</span> 123 Schedule Planner Lane, Productivity City, PC 12345</li>
+        <li><span></span> <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=CllgCJvqJvdMCNDFZhdPqsRXlfWnlRdBGggnwKNMZXbxwmfspjtDCbMRhbZdLfNfRPpVWQWhwSB" class="email">support@scheduleplanner.com</a> </li>
+        <li><span></span> +91 81214 81249</li>
+        <li><span></span> We are here to help you make the most of your time!</li>
       </ul>
-      <p>We are here to help you make the most of your time!</p>
     </div>
   </div>
 
@@ -119,7 +128,7 @@
       });
     }
 
-    document.getElementById("timetableForm").addEventListener("submit", function (e) {
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
       e.preventDefault();
 
       const email = document.getElementById("email").value;
@@ -129,6 +138,13 @@
         alert("Unauthorized! Incorrect credentials.");
         return;
       }
+
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("generate-section").style.display = "block";
+    });
+
+    document.getElementById("timetableForm").addEventListener("submit", function (e) {
+      e.preventDefault();
 
       const totalSections = parseInt(document.getElementById("sections").value);
       const sipCount = parseInt(document.getElementById("sip").value);
@@ -249,4 +265,3 @@
   </script>
 </body>
 </html>
-``` 
