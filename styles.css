@@ -224,7 +224,7 @@ ul li::before {
 }
 
 ul li:nth-child(2)::before {
-  content: "📞";
+  content: "📍";
 }
 
 ul li:nth-child(3)::before {
