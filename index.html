@@ -66,8 +66,11 @@
 
       <div id="generate-section" style="display: none;">
         <form>
-          <label for="fileInput">Upload Faculty Data (Excel)</label>
-          <input type="file" id="fileInput" accept=".xlsx" required />
+          <label for="fileInput" class="file-label">
+            <span class="file-button">📂 Choose Excel File</span>
+            <span id="fileName" class="file-name">No file chosen</span>
+          </label>
+          <input type="file" id="fileInput" accept=".xlsx" required style="display: none;" />
           <br><br>
 
           <label for="sipCount">SIP Sections</label>
@@ -143,6 +146,11 @@
 
     let facultyList = [];
     let generatedTimetableBlob = null;
+
+    document.getElementById("fileInput").addEventListener("change", function () {
+      const fileName = this.files[0] ? this.files[0].name : "No file chosen";
+      document.getElementById("fileName").textContent = fileName;
+    });
 
     document.getElementById("fileInput").addEventListener("change", handleFile, false);
 

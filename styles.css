@@ -455,6 +455,39 @@ ul li:nth-child(3)::before {
   box-shadow: 0 0 20px #ff00cc;
 }
 
+/* File Upload */
+.file-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.file-button {
+  background: linear-gradient(90deg, #00f5c9, #00d2ff);
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.file-button:hover {
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.file-name {
+  font-family: 'Rubik', sans-serif;
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
@@ -493,7 +526,6 @@ ul li:nth-child(3)::before {
   color: white;
 }
 
- 
 .email{
   text-decoration: none;
   color: white;
